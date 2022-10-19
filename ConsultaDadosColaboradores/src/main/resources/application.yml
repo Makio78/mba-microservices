@@ -1,0 +1,12 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/Funcionarios
+    username: root
+    password: fiap-mba
+    driver-class-nam: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
