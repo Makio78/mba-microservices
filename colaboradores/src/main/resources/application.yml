@@ -1,6 +1,6 @@
-eureka:
-  instance:
-    hostname: eureka
+#eureka:
+#  instance:
+#    hostname: eureka
 
 server:
   port: 8084
@@ -20,5 +20,5 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-    servlet:
-      load-on-startup: 1
+#    servlet:
+#      load-on-startup: 1
