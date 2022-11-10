@@ -1,0 +1,24 @@
+eureka:
+  instance:
+    hostname: eureka
+
+server:
+  port: 8083
+
+spring:
+  application:
+    name: trilhas
+  data:
+    mongo:
+      db:
+        authentication-database: admin
+        host: mongo
+        port: 27017
+        username: root
+        password: fiap-mba
+        database: trilhas
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+    servlet:
+      load-on-startup: 1

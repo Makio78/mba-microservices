@@ -1,0 +1,24 @@
+eureka:
+  instance:
+    hostname: eureka
+
+server:
+  port: 8084
+
+spring:
+  application:
+    name: colaboradores
+  data:
+    mongo:
+      db:
+        authentication-database: admin
+        host: mongo
+        port: 27017
+        username: root
+        password: fiap-mba
+        database: colaboradores
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+    servlet:
+      load-on-startup: 1

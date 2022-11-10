@@ -1,0 +1,65 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - type: volume
+        source: mongodb_data_volume
+        target: /data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: fiap-mba
+    networks:
+      - microservice-network
+
+  eureka:
+    build:
+      context: ./eureka
+    ports:
+      - 8761:8761
+    networks:
+      - microservice-network
+
+  cursos:
+    build:
+      context: ./cursos
+    depends_on:
+      - mongo
+      - eureka
+    ports:
+      - 8082:8082
+    networks:
+      - microservice-network
+
+  trilhas:
+    build:
+      context: ./trilhas
+    depends_on:
+      - mongo
+      - eureka
+    ports:
+      - 8083:8083
+    networks:
+      - microservice-network
+
+  colaboradores:
+    build:
+      context: ./colaboradores
+    depends_on:
+      - mongo
+      - eureka
+    ports:
+      - 8084:8084
+    networks:
+      - microservice-network
+
+volumes:
+  mongodb_data_volume:
+
+networks:
+  microservice-network:
+    driver: bridge
