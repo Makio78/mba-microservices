@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: trilhas
+          uri: http://trilhas:8010/trilhas/
+          predicates:
+            - Path=/trilhas/**
+        - id: cursos
+          uri: http://cursos:8020/cursos/
+          predicates:
+            - Path=/cursos/**
+        - id: colaboradores
+          uri: http://colaboradores:8030/colaboradores/
+          predicates:
+            - Path=/colaboradores/**
+
+
