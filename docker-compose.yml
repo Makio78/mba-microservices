@@ -16,13 +16,22 @@ services:
     networks:
       - microservice-network
 
+  eureka:
+    build:
+      context: ./eureka
+    ports:
+      - 8761:8761
+    networks:
+      - microservice-network
+
   cursos:
     build:
       context: ./cursos
     depends_on:
       - mongo
+      - eureka
     ports:
-      - 8082:8082
+      - 8020:8020
     networks:
       - microservice-network
 
@@ -31,8 +40,10 @@ services:
       context: ./trilhas
     depends_on:
       - mongo
+      - eureka
+      - cursos
     ports:
-      - 8083:8083
+      - 8010:8010
     networks:
       - microservice-network
 
@@ -41,8 +52,11 @@ services:
       context: ./colaboradores
     depends_on:
       - mongo
+      - eureka
+      - cursos
+      - trilhas
     ports:
-      - 8084:8084
+      - 8030:8030
     networks:
       - microservice-network
 
