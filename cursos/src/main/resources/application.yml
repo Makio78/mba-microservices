@@ -1,18 +1,22 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/
+
 server:
-  port: 8082
+  port: 8020
 
 spring:
   application:
     name: cursos
   data:
-    mongo:
-      db:
-        authentication-database: admin
-        host: mongo
-        port: 27017
-        username: root
-        password: fiap-mba
-        database: cursos
+    mongodb:
+      authentication-database: admin
+      host: mongo
+      port: 27017
+      username: root
+      password: fiap-mba
+      database: cursos
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
