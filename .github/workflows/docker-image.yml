@@ -17,8 +17,5 @@ jobs:
     - name: Build the Docker image
       run: docker-compose build
       
-    - name: Build-DB
-      run: docker-compose build
-      
     - name: Create-DB
       run: docker-compose up -d
