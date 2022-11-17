@@ -3,7 +3,11 @@ package br.com.fiap.mba.microservices.cursos.service;
 
 import br.com.fiap.mba.microservices.cursos.model.Cursos;
 import br.com.fiap.mba.microservices.cursos.repository.CursosRepository;
+import com.mongodb.client.result.UpdateResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.repository.Query;
+import org.springframework.data.mongodb.repository.Update;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +34,7 @@ public class CursosServiceImpl implements CursosService {
     }
 
     @Override
-    public Cursos saveOrUpdateCurso(Cursos cursos) {
+    public Cursos saveOrUpdate(Cursos cursos) {
         return cursosRepository.save(cursos);
     }
 

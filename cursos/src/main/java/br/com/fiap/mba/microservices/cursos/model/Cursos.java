@@ -1,12 +1,14 @@
 package br.com.fiap.mba.microservices.cursos.model;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
+
+import java.util.List;
 
 @Document(collection = "cursos")
 public class Cursos {
 
-    @Id
+    @MongoId
     private String id;
     private String nome;
     private String cargaHoraria;
@@ -45,6 +47,7 @@ public class Cursos {
     public void setCargaHoraria(String cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
     }
+
 
     public String getDescricao() {
         return descricao;

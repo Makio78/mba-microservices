@@ -1,13 +1,19 @@
 package br.com.fiap.mba.microservices.colaboradores.controller;
 
-import br.com.fiap.mba.microservices.colaboradores.dto.ColaboradorDTO;
+import br.com.fiap.mba.microservices.colaboradores.model.Colaborador;
 import br.com.fiap.mba.microservices.colaboradores.service.ColaboradorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -20,33 +26,75 @@ public class ColaboradorController {
     private ColaboradorService colaboradorService;
 
     @GetMapping(value = "/")
-    public List<ColaboradorDTO> getAllColaboradores() {
+    public List<Colaborador> getAllColaboradores() {
         logger.info("Getting all colaboradores.");
-        return colaboradorService.findAll();
+        List<Colaborador> colaboradores = colaboradorService.findAll();
+
+        for (Colaborador colaborador: colaboradores){
+            if (colaborador.getTrilhas() != null) {
+                List<Object> trilhas = new ArrayList<>();
+                for (Object trilha : colaborador.getTrilhas()) {
+                    String uri = "http://gateway:8080/trilhas/" + trilha;
+                    RestTemplate restTemplate = new RestTemplate();
+                    try {
+                        ResponseEntity<Object> entity = restTemplate.getForEntity(uri, Object.class);
+                        HttpStatus statusCode = entity.getStatusCode();
+                        Map<Object, Object> response = (Map<Object, Object>) entity.getBody();
+                        trilhas.add(response);
+
+                    } catch (HttpServerErrorException e) {
+                        logger.info(e.toString());
+                    }
+                }
+                colaborador.setTrilhas(trilhas);
+            }
+
+        }
+        return colaboradores;
     }
 
     @GetMapping(value = "/{colaboradorId}")
-    public ColaboradorDTO getColaboradorById(@PathVariable String colaboradorId) {
+    public Colaborador getColaboradorById(@PathVariable String colaboradorId) {
         logger.info("Getting colaborador with ID: {}", colaboradorId);
-        return colaboradorService.findColaboradorById(colaboradorId);
+        Colaborador colaborador = colaboradorService.findColaboradorById(colaboradorId);
+
+        if (colaborador.getTrilhas() != null) {
+            List<Object> trilhas = new ArrayList<>();
+            for (Object trilha : colaborador.getTrilhas()) {
+                String uri = "http://gateway:8080/trilhas/" + trilha;
+                RestTemplate restTemplate = new RestTemplate();
+                try {
+                    ResponseEntity<Object> entity = restTemplate.getForEntity(uri, Object.class);
+                    HttpStatus statusCode = entity.getStatusCode();
+                    Map<Object, Object> response = (Map<Object, Object>) entity.getBody();
+                    trilhas.add(response);
+
+                } catch (HttpServerErrorException e) {
+                    logger.info(e.toString());
+                }
+            }
+            colaborador.setTrilhas(trilhas);
+        }
+
+        return colaborador;
     }
 
     @GetMapping
-    public List<ColaboradorDTO> getColaboradorByRegex(@RequestParam(value = "nome") String regexNome) {
+    public List<Colaborador> getColaboradorByRegex(@RequestParam(value = "nome") String regexNome) {
             logger.info("Getting colaborador with Nome: {}", regexNome);
             return colaboradorService.findColaboradorByNomeRegex(regexNome);
     }
 
     @PostMapping(value = "/create")
-    public ColaboradorDTO addColaborador(@RequestBody ColaboradorDTO colaboradorDTO) {
+    public Colaborador addColaborador(@RequestBody Colaborador colaborador) {
         logger.info("Saving colaborador.");
-        return colaboradorService.saveOrUpdateColaborador(colaboradorDTO);
+        return colaboradorService.saveOrUpdateColaborador(colaborador);
     }
 
     @PutMapping(value = "/update/{colaboradorId}")
-    public ColaboradorDTO updateColaborador(@PathVariable String colaboradorId, @RequestBody ColaboradorDTO colaboradorDTO) {
+    public Colaborador updateColaborador(@PathVariable String colaboradorId, @RequestBody Colaborador colaborador) {
         logger.info("Updating colaborador with ID: {}", colaboradorId);
-        return colaboradorService.saveOrUpdateColaborador(colaboradorDTO);
+        return colaboradorService.saveOrUpdateColaborador(colaborador);
     }
 
     @DeleteMapping(value = "/delete/{colaboradorId}")

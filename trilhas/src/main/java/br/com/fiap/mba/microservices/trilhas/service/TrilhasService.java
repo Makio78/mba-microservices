@@ -1,14 +1,14 @@
 package br.com.fiap.mba.microservices.trilhas.service;
 
-import br.com.fiap.mba.microservices.trilhas.dto.TrilhasDTO;
+import br.com.fiap.mba.microservices.trilhas.model.Trilhas;
 
 import java.util.List;
 
 public interface TrilhasService {
 
-    List<TrilhasDTO> findAll();
-    TrilhasDTO findTrilhaById(String trilhaId);
-    List<TrilhasDTO> findTrilhaByNomeRegex(String regexString);
-    TrilhasDTO saveOrUpdateTrilha(TrilhasDTO trilhasDTO);
+    List<Trilhas> findAll();
+    Trilhas findTrilhaById(String trilhaId);
+    List<Trilhas> findTrilhaByNomeRegex(String regexString);
+    Trilhas saveOrUpdateTrilha(Trilhas trilhas);
     void deleteTrilhaById(String trilhaId);
 }

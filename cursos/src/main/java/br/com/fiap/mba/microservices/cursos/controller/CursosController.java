@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/cursos")
@@ -39,13 +39,34 @@ public class CursosController {
     @PostMapping(value = "/create")
     public Cursos addCurso(@RequestBody Cursos cursos) {
         logger.info("Saving curso.");
-        return cursosService.saveOrUpdateCurso(cursos);
+        return cursosService.saveOrUpdate(cursos);
     }
 
     @PutMapping(value = "/update/{cursoId}")
     public Cursos updateCurso(@PathVariable String cursoId, @RequestBody Cursos cursos) {
         logger.info("Updating curso with ID: {}", cursoId);
-        return cursosService.saveOrUpdateCurso(cursos);
+        Cursos curso = cursosService.findCursoById(cursoId);
+
+        if (curso != null) {
+
+            if (cursos.getId()!= null) {
+                curso.setId(cursos.getId());
+            }
+            if (cursos.getNome() != null) {
+                curso.setNome(cursos.getNome());
+            }
+            if (cursos.getCargaHoraria() != null) {
+                curso.setCargaHoraria(cursos.getCargaHoraria());
+            }
+            if (cursos.getDescricao() != null) {
+                curso.setDescricao(cursos.getDescricao());
+            }
+
+            cursosService.deleteCursoById(cursoId);
+            cursosService.saveOrUpdate(curso);
+        }
+
+        return curso;
     }
 
     @DeleteMapping(value = "/delete/{cursoId}")

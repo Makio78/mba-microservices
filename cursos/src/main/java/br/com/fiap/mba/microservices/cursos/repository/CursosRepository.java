@@ -3,6 +3,7 @@ package br.com.fiap.mba.microservices.cursos.repository;
 import br.com.fiap.mba.microservices.cursos.model.Cursos;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
+import org.springframework.data.mongodb.repository.Update;
 
 import java.util.List;
 
