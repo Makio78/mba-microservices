@@ -44,10 +44,21 @@ docker-compose ps
 
 
 Swagger:
-Gerenciamento de Trilhas - http://0.0.0.0:8010/swagger-ui/index.html#/
-Gerenciamento de Cursos - http://0.0.0.0:8020/swagger-ui/index.html#/
-Gerenciamento de Colaboradores - http://0.0.0.0:8030/swagger-ui/index.html#/
+Gerenciamento de Trilhas:
+``` bash
+http://0.0.0.0:8010/swagger-ui/index.html#/
+``` bash
+Gerenciamento de Cursos:
+``` bash
+http://0.0.0.0:8020/swagger-ui/index.html#/
+``` bash
+Gerenciamento de Colaboradores:
+``` bash
+http://0.0.0.0:8030/swagger-ui/index.html#/
+``` bash
 
-Spring Eureka - http://localhost:8761/
-
+Spring Eureka
+``` bash
+http://localhost:8761/
+``` bash
 
