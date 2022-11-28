@@ -41,3 +41,13 @@ docker-compose ps
 [Docker] Containers
 
 [CI/CD] GitHub Actions para entrega contínua.
+
+
+Swagger:
+Gerenciamento de Trilhas - http://0.0.0.0:8010/swagger-ui/index.html#/
+Gerenciamento de Cursos - http://0.0.0.0:8020/swagger-ui/index.html#/
+Gerenciamento de Colaboradores - http://0.0.0.0:8030/swagger-ui/index.html#/
+
+Spring Eureka - http://localhost:8761/
+
+
