@@ -47,18 +47,20 @@ Swagger:
 Gerenciamento de Trilhas:
 ``` bash
 http://0.0.0.0:8010/swagger-ui/index.html#/
-``` bash
+```
+
 Gerenciamento de Cursos:
 ``` bash
 http://0.0.0.0:8020/swagger-ui/index.html#/
-``` bash
+```
+
 Gerenciamento de Colaboradores:
 ``` bash
 http://0.0.0.0:8030/swagger-ui/index.html#/
-``` bash
+```
 
 Spring Eureka
 ``` bash
 http://localhost:8761/
-``` bash
+```
 
