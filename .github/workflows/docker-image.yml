@@ -15,7 +15,15 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker-compose build
+      run: docker-compose -f docker-compose-build.yml build
+
+    - uses: actions/checkout@v3
+    - name: Login to DockerHub
+      run: docker login -u lincolncarvalho -p dckr_pat_b8I71t5eEvTZw-Oj-F7cgeWJsQ4
+
+    - uses: actions/checkout@v3
+    - name: Publish Docker image to DockerHub
+      run: docker-compose docker-compose-build.yml push
       
     - name: Create-DB
-      run: docker-compose up -d
+      run: docker-compose docker-compose.yml up -d

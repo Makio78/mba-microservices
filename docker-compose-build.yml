@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  eureka:
+    image: lincolncarvalho/eureka:1.0
+    build:
+      context: ./eureka
+    ports:
+      - 8761:8761
+    networks:
+      - microservice-network
+
+  gateway:
+    image: lincolncarvalho/gateway:1.0
+    build:
+      context: ./gateway
+    ports:
+      - 8080:8080
+    networks:
+      - microservice-network
+
+  cursos:
+    image: lincolncarvalho/cursos:1.0
+    build:
+      context: ./cursos
+    ports:
+      - 8020:8020
+    networks:
+      - microservice-network
+
+  trilhas:
+    image: lincolncarvalho/trilhas:1.0
+    build:
+      context: ./trilhas
+    ports:
+      - 8010:8010
+    networks:
+      - microservice-network
+
+  colaboradores:
+    image: lincolncarvalho/colaboradores:1.0
+    build:
+      context: ./colaboradores
+    ports:
+      - 8030:8030
+    networks:
+      - microservice-network
+
+networks:
+  microservice-network:
+    driver: bridge
