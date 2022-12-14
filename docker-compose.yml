@@ -31,16 +31,14 @@ services:
       - microservice-network
 
   eureka:
-    build:
-      context: ./eureka
+    image: lincolncarvalho/eureka:1.0
     ports:
       - 8761:8761
     networks:
       - microservice-network
 
   gateway:
-    build:
-      context: ./gateway
+    image: lincolncarvalho/gateway:1.0
     depends_on:
       - eureka
     ports:
@@ -49,8 +47,7 @@ services:
       - microservice-network
 
   cursos:
-    build:
-      context: ./cursos
+    image: lincolncarvalho/cursos:1.0
     depends_on:
       - mongo
       - eureka
@@ -60,8 +57,7 @@ services:
       - microservice-network
 
   trilhas:
-    build:
-      context: ./trilhas
+    image: lincolncarvalho/trilhas:1.0
     depends_on:
       - mongo
       - eureka
@@ -72,8 +68,7 @@ services:
       - microservice-network
 
   colaboradores:
-    build:
-      context: ./colaboradores
+    image: lincolncarvalho/colaboradores:1.0
     depends_on:
       - mongo
       - eureka
