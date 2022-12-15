@@ -37,7 +37,7 @@ services:
           - mongo-express
 
   eureka:
-    image: lincolncarvalho/eureka:1.0
+    image: "lincolncarvalho/eureka:${SWARM_TAG}"
     deploy:
       replicas: 1
     ports:
@@ -48,7 +48,7 @@ services:
           - eureka
 
   gateway:
-    image: lincolncarvalho/gateway:1.0
+    image: "lincolncarvalho/gateway:${SWARM_TAG}"
     deploy:
       replicas: 1
     depends_on:
@@ -61,7 +61,7 @@ services:
           - gateway
 
   cursos:
-    image: lincolncarvalho/cursos:1.0
+    image: "lincolncarvalho/cursos:${SWARM_TAG}"
     deploy:
       replicas: 1
     depends_on:
@@ -75,7 +75,7 @@ services:
           - cursos
 
   trilhas:
-    image: lincolncarvalho/trilhas:1.0
+    image: "lincolncarvalho/trilhas:${SWARM_TAG}"
     deploy:
       replicas: 1
     depends_on:
@@ -90,7 +90,7 @@ services:
           - trilhas
 
   colaboradores:
-    image: lincolncarvalho/colaboradores:1.0
+    image: "lincolncarvalho/colaboradores:${SWARM_TAG}"
     deploy:
       replicas: 1
     depends_on:

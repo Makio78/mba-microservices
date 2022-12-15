@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   eureka:
-    image: lincolncarvalho/eureka:1.0
+    image: "lincolncarvalho/eureka:${BUILD_TAG}"
     build:
       context: ./eureka
     ports:
@@ -11,7 +11,7 @@ services:
       - microservice-network
 
   gateway:
-    image: lincolncarvalho/gateway:1.0
+    image: "lincolncarvalho/gateway:${BUILD_TAG}"
     build:
       context: ./gateway
     ports:
@@ -20,7 +20,7 @@ services:
       - microservice-network
 
   cursos:
-    image: lincolncarvalho/cursos:1.0
+    image: "lincolncarvalho/cursos:${BUILD_TAG}"
     build:
       context: ./cursos
     ports:
@@ -29,7 +29,7 @@ services:
       - microservice-network
 
   trilhas:
-    image: lincolncarvalho/trilhas:1.0
+    image: "lincolncarvalho/trilhas:${BUILD_TAG}"
     build:
       context: ./trilhas
     ports:
@@ -38,7 +38,7 @@ services:
       - microservice-network
 
   colaboradores:
-    image: lincolncarvalho/colaboradores:1.0
+    image: "lincolncarvalho/colaboradores:${BUILD_TAG}"
     build:
       context: ./colaboradores
     ports:

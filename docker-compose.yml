@@ -10,9 +10,8 @@ services:
       - type: volume
         source: mongodb_data_volume
         target: /data/db
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: fiap-mba
+    env_file:
+      - ./config_files/.env_db_mongo
     networks:
       - microservice-network
 
@@ -31,14 +30,14 @@ services:
       - microservice-network
 
   eureka:
-    image: lincolncarvalho/eureka:1.0
+    image: "lincolncarvalho/eureka:${TAG}"
     ports:
       - 8761:8761
     networks:
       - microservice-network
 
   gateway:
-    image: lincolncarvalho/gateway:1.0
+    image: "lincolncarvalho/gateway:${TAG}"
     depends_on:
       - eureka
     ports:
@@ -47,7 +46,7 @@ services:
       - microservice-network
 
   cursos:
-    image: lincolncarvalho/cursos:1.0
+    image: "lincolncarvalho/cursos:${TAG}"
     depends_on:
       - mongo
       - eureka
@@ -57,7 +56,7 @@ services:
       - microservice-network
 
   trilhas:
-    image: lincolncarvalho/trilhas:1.0
+    image: "lincolncarvalho/trilhas:${TAG}"
     depends_on:
       - mongo
       - eureka
@@ -68,7 +67,7 @@ services:
       - microservice-network
 
   colaboradores:
-    image: lincolncarvalho/colaboradores:1.0
+    image: "lincolncarvalho/colaboradores:${TAG}"
     depends_on:
       - mongo
       - eureka
